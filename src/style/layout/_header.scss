@@ -1,0 +1,23 @@
+.navigation {
+  background-color: $primary_100;
+  padding: 15px 3%;
+  .nav-holder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    gap: 20px;
+    .title {
+      a {
+        @include H2(700, $base_600);
+      }
+    }
+    .info {
+      font-family: 'Satoshi Variable', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: $base_600;
+    }
+  }
+}

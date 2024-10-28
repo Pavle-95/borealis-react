@@ -1,0 +1,33 @@
+// Imports
+@import 'variables';
+@import 'mixins';
+
+@import 'layout/header';
+@import 'views/home';
+@import 'views/configurator';
+
+// Global
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+// Fonts
+@font-face {
+  font-family: 'Satoshi Variable', sans-serif;
+  src: url('../fonts/Satoshi_Complete/Fonts/TTF/Satoshi-Variable.ttf');
+}
+
+// Container
+.container {
+
+}
+
+a {
+  text-decoration: none;
+}
+
+.loading {
+  @include H6();
+}

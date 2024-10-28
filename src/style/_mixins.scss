@@ -1,0 +1,146 @@
+// Fonts Mixins
+@mixin H1($weight: 400) {
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 42px;
+  font-weight: 400;
+  line-height: 46.2px;
+  text-align: left;
+}
+
+@mixin H2($weight: 400, $color: #000000) {
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 32px;
+  font-weight: $weight;
+  line-height: 41.6px;
+  color: $color;
+}
+
+@mixin H3($weight: 400,  $color: #000000) {
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 24px;
+  font-weight: $weight;
+  line-height: 33.6px;
+  color: $color;
+}
+
+@mixin H4($weight: 400, $color: #000000) {
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 18px;
+  font-weight: $weight;
+  line-height: 25.2px;
+  color: $color;
+}
+
+@mixin H5($weight: 400, $color: #000000) {
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 16px;
+  font-weight: $weight;
+  line-height: 24px;
+  color: $color;
+}
+
+@mixin H6($weight: 400, $color: #000000) {
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 14px;
+  font-weight: $weight;
+  line-height: 19.6px;
+  color: $color;
+}
+
+// Buttons
+@mixin primary_btn_big($font_size: 24px) {
+  padding: 5px 15px;
+  background-color: $primary_100;
+  border-radius: 3px;
+  border: none;
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: $font_size;
+  font-weight: 400;
+  line-height: 33.6px;
+  color: $base_600;
+  &:hover {
+    cursor: pointer;
+    background-color: $primary_200;
+  }
+  &:disabled {
+    background-color: $base_400;
+  }
+}
+
+@mixin primary_btn_small() {
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: $primary_100;
+  border-radius: 3px;
+  border: none;
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25.2px;
+  color: $base_600;
+  &:hover {
+    cursor: pointer;
+    background-color: $primary_200;
+  }
+  &:disabled {
+    background-color: $base_400;
+  }
+}
+
+@mixin primary_btn_icon() {
+  padding: 5px;
+  width: 34px;
+  height: 34px;
+  border-radius: 3px;
+  background-color: $primary_200;
+  &:hover {
+    cursor: pointer;
+    background-color: $primary_200;
+  }
+  &:disabled {
+    background-color: $base_400;
+  }
+}
+
+// @mixin primary_btn_big() {
+//   padding: 5px 15px;
+//   background-color: $base_600;
+//   border-radius: 3px;
+//   border: 1px solid $base_200;
+//   font-family: 'Satoshi Variable', sans-serif;
+//   font-size: 18px;
+//   font-weight: 400;
+//   line-height: 25.2px;
+//   color: $base_100;
+//   &:hover {
+//     cursor: pointer;
+//     background-color: $base_500;
+//   }
+//   &:disabled {
+//     background-color: $base_400;
+//     border: 1px solid $base_400;
+//     color: $base_400;
+//   }
+// }
+
+@mixin link() {
+  position: relative;
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: $primary_100;
+  text-decoration: none;
+  &::before {
+    transition: .3s ease;
+    position: absolute;
+    width: 0%;
+    height: 1px;
+    content: '';
+    background-color: $primary_100;
+  }
+  &:hover {
+    cursor: pointer;
+    width: 100%;
+  }
+}

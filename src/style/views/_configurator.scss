@@ -1,0 +1,193 @@
+.config-form {
+  padding: 40px 0px;
+  display: flex;
+  justify-content: center;
+
+  .form-holder {
+    max-width: 600px;
+    padding: 0px 30px;
+    .form-title {
+      margin-bottom: 20px;
+      @include H2(700, $base_100)
+    }
+    form {
+      .chouse-manufacturers {
+        margin-bottom: 20px;
+        .manufacturers-sub-title {
+          @include H4(700, $primary_100);
+          margin-bottom: 10px;
+        }
+        .manufacturer-list {
+          padding: 14px 10px;
+          list-style: none;
+          display: flex;
+          flex-wrap: wrap;
+
+          .single-manufacturer-box {
+            padding: 4px 0px;
+            flex: 0 0 30%;
+            label {
+              margin-left: 10px;
+              @include H5(400, $base_100)
+            }
+          }  
+        }
+      }
+
+      .chouse-services {
+        margin-bottom: 20px;
+        .services-sub-title {
+          @include H4(700, $primary_100);
+          margin-bottom: 10px;
+        }
+        .services-list {
+          padding: 14px 10px;
+          list-style: none;
+          display: flex;
+          flex-wrap: wrap;
+
+          .single-service-box {
+            padding: 4px 0px;
+            flex: 0 0 50%;
+            label {
+              margin-left: 10px;
+              @include H5(400, $base_100);
+              span {
+                @include H5(400, $primary_200);
+              }
+            }
+          }  
+        }
+      }
+
+      .total-holder {
+        margin-bottom: 20px;
+        border-radius: 5px;
+        background-color: $bg_200;
+        padding: 11px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .total {
+          @include H4(400, $base_200);
+          span {
+            @include H4(700, $primary_100);
+          }
+        }
+        .coupon {
+          @include H5(400, $primary_100);
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        
+        .coupon-holder{
+          max-width: 200px;
+          display: flex;
+          justify-content: flex-end;
+          flex-wrap: wrap;
+          gap: 10px;
+          .coupon-value {
+            padding: 5px 5px 5px 10px;
+            width: 70%;
+            flex: 1 0 70%;
+            line-height: 22px !important;
+            background-color: $base_500;
+            border: 1px solid $base_500;
+            border-radius: 3px;
+            @include H5(500, $base_100);
+            &:hover {
+              cursor: pointer;
+            }
+            &:active, &:focus {
+              border: 1px solid $primary_200;
+              outline: $primary_200;
+              box-shadow: 0px 0px 0px 2px #0000001A;
+            }
+            &:disabled {
+              color: $base_200;
+            }
+            &::placeholder {
+              @include H4(500, $base_200);
+            }
+          }
+          .coupon-submit {
+            flex: 0 0 15%;
+            @include primary_btn_icon()
+          }
+          .coupon-valid-value {
+            padding: 0px 10px;
+            margin-right: auto;
+            background-color: $bg_100;
+            display: flex;
+            gap: 5px;
+            border: 1px solid $base_400;
+            border-radius: 99px;
+            @include H6(400, $base_100);
+          }
+        }
+      }
+
+      .user-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .user-info-sub-title {
+          flex: 0 0 100%;
+          margin-bottom: 10px;
+          @include H4(700, $primary_100)
+        }
+        div {
+          margin-bottom: 20px;
+          label {
+            padding: 0px 10px;
+            width: 100%;
+            @include H6(400, $base_100)
+          }
+          input, textarea {
+            padding: 5px 5px 5px 10px;
+            width: 100%;
+            background-color: $base_500;
+            border: 1px solid $base_500;
+            border-radius: 3px;
+            @include H5(500, $base_100);
+            &:hover {
+              cursor: pointer;
+            }
+            &:active, &:focus {
+              border: 1px solid $primary_200;
+              outline: $primary_200;
+              box-shadow: 0px 0px 0px 2px #0000001A;
+            }
+            &:disabled {
+              color: $base_200;
+            }
+            &::placeholder {
+              @include H4(500, $base_200);
+            }
+          }
+          .class-error {
+            padding: 0px 10px;
+            @include H6(00, $error);
+          }
+        }
+        .error-border {
+          border: 1px solid $error;
+        }
+        .full-name, .phone-number {
+          flex: 0 0 48%;
+        }
+        .email-address {
+          flex: 0 0 100%;
+        }
+        .note {
+          flex: 0 0 100%;
+        }
+        .submit-btn {
+          flex: 0 0 100%;
+          @include primary_btn_big(18)
+        }
+      }
+    }
+  }
+}
