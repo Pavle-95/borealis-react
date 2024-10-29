@@ -21,7 +21,7 @@ const UserInfo = ( { fullName, setFullName, phoneNumber, setPhoneNumber,
       <div className="phone-number">
         <label>Broj telefona</label>
         <input 
-          className={errors.fullName ? "error-border" : " "}
+          className={errors.phoneNumber ? "error-border" : " "}
           type="text" 
           placeholder="Unesite broj telefona"
           value={phoneNumber}
@@ -33,7 +33,7 @@ const UserInfo = ( { fullName, setFullName, phoneNumber, setPhoneNumber,
       <div className="email-address">
         <label>Email adresa</label>
         <input 
-          className={errors.fullName ? "error-border" : " "}
+          className={errors.email ? "error-border" : " "}
           type="text" 
           placeholder="Unesite email adresu"
           value={email}

@@ -20,7 +20,7 @@ const ManufacturerList = ({ manufacturers, setManufacturer }) => {
               id={`manufacturer-${manufacturer.id}`} 
               name="manufacturer"
               value={manufacturer.name}
-              onChange={(e) => setManufacturer(e.target.value)}
+              onChange={(e) => setManufacturer(manufacturer.id)}
             />
             <label htmlFor={`manufacturer-${manufacturer.id}`}>
               {manufacturer.name} {/* Label text */}

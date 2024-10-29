@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+// Toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // Partials (Components)
 import ManufacturerList from './partials/manufacturesList';
 import ProvidedServicesList from './partials/providedServicesList';
@@ -12,7 +16,8 @@ import { useFormStore } from '../store/formStore';
 import {
   getAllManufacturers,
   getAllServices,
-
+  validatePromoCode,
+  contact
 } from 'services/main_service';
 
 // Icon
@@ -22,35 +27,42 @@ import closeIcon from '../assets/icons/close-icon.svg'
 
 const Form = () => {
   // Variables Form API
-  const [ manufacturers, setManufacturers ] = useState(false);
-  const [ providedServices, setProvidedServices ] = useState(false);
+  const [manufacturers, setManufacturers] = useState(false);
+  const [providedServices, setProvidedServices] = useState(false);
 
-  // Varibales for Form
+  // Variables for Form
   const { formData, setFormData } = useFormStore();
-  
+
   const [manufacturer, setManufacturer] = useState(formData.manufacturer || '');
+
   const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedServicesID, setSelectedServicesID] = useState([]);
+
   const [fullName, setFullName] = useState(formData.fullName || '');
   const [phoneNumber, setPhoneNumber] = useState(formData.phoneNumber || 0);
   const [email, setEmail] = useState(formData.email || '');
   const [notes, setNotes] = useState(formData.notes || '');
 
+  // Total
   const [total, setTotal] = useState(0);
 
   // Coupon
   const [couponActive, setCouponActive] = useState(false);
   const [couponValue, setCouponValue] = useState('');
   const [couponValid, setCouponValid] = useState(true);
+  const [couponPercentage, setCouponPercentage] = useState(0);
 
   // Error state
   const [errors, setErrors] = useState({
     fullName: '',
     phoneNumber: '',
     email: '',
-    notes: ''
+    notes: '',
+    manufacturerError: '',
+    selectedServicesError: ''
   });
 
-  // Function
+  // Function to validate the form
   const validateForm = () => {
     let newErrors = { fullName: '', phoneNumber: '', email: '', notes: '', coupon: '' };
     let isValid = true;
@@ -76,11 +88,21 @@ const Form = () => {
       isValid = false;
     }
 
+    if(!manufacturer) {
+      newErrors.manufacturerError = 'Molimo odaberite jednog proizvođača vozila';
+      isValid = false;
+    }
+
+    if(selectedServices.length === 0) {
+      newErrors.selectedServicesError = 'Molimo odaberite jednog ili više usluga koju trebate';
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
   };
 
-  // Services Function  
+  // Fetch manufacturers and services
   const fetchManufacturers = async () => {
     try {
         const data = await getAllManufacturers();
@@ -100,11 +122,10 @@ const Form = () => {
     }
   };
 
-
-  // Handlers
+  // Handlers for service selection
   const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-
+    const { value, checked, id } = event.target;
+    
     setSelectedServices((prevSelected) => {
         if (checked) {
           return [...prevSelected, value];
@@ -112,64 +133,95 @@ const Form = () => {
           return prevSelected.filter((service) => service !== value);
         }
     });
+
+    setSelectedServicesID((prevSelected) => {
+      if (checked) {
+        return [...prevSelected, id];
+      } else {
+        return prevSelected.filter((service) => service !== id);
+      }
+  });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // Submit handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();    
 
     if (validateForm()) {
       const updatedFormData = {
-        manufacturer,
-        selectedServices,
-        fullName,
-        phoneNumber,
-        email,
-        notes,
+        manufacturerId: manufacturer,
+        serviceIds: selectedServicesID,
+        promoCode: couponValue,
+        fullName: fullName,
+        email: email,
+        phoneNumber: phoneNumber,
+        note: notes,
       };
+      
       console.log('Form Data Submitted:', updatedFormData);
+      const response = await contact(updatedFormData)
+
+      console.log(response);
     }
   };
 
-  const handleCouponSubmit = () => {
-    if(couponValue !== '') {
-      setCouponValid(false);
+  // Coupon handling
+  const handleCouponSubmit = async () => {
+    if(couponValue === '') {
+      toast.warning("Promotional code invalid", { autoClose: 1000 });
+      return;
     }
-    else {
-      setCouponValid(true);
+
+    const data = await validatePromoCode(couponValue);
+    
+    if(data.message) {
+      toast.warning(data.message, { autoClose: 1000 });
+      return;
+    }
+
+    if (data.discountPercentage && couponValid) {
+      setCouponPercentage(data.discountPercentage);      
+      setCouponValid(false);
+      recalculateTotal();
+
+      return;
     }
   }
 
   const handleRemoveCoupon = () => {
+    setCouponPercentage(0);
     setCouponValid(true);
+    setCouponValue('');
+    recalculateTotal();
   }
-  
 
-  // Effects
+  const recalculateTotal = () => {
+    let newTotal = selectedServices.reduce((acc, service) => acc + parseInt(service), 0);
+    const discountAmount = (newTotal * couponPercentage) / 100;
+    newTotal -= discountAmount;
+
+    setTotal(newTotal);
+  }
+
   useEffect(() => {
     fetchManufacturers();
     fetchServices();
   }, []); 
 
   useEffect(() => {
-      let newTotal = 0;
-
-      selectedServices.forEach(service => {
-        const servicePrice = parseInt(service) 
-        newTotal += servicePrice;
-
-      })
-      
-      setTotal(newTotal);
-  }, [selectedServices, providedServices]);
+    recalculateTotal();
+  }, [selectedServices, couponPercentage]);
 
   return (
     <section className='config-form'>
+      <ToastContainer />
       <div className="form-holder">
         <h1 className='form-title'>Konfigurator Servisa</h1>
         
         <form onSubmit={handleSubmit}>
           <div className="chouse-manufacturers">
             <h3 className='manufacturers-sub-title'>Odaberite proizvođača vašeg vozila</h3>
+           <h3 className='manufacturers-sub-title-error'>{errors.manufacturerError}</h3>
             <ManufacturerList 
               manufacturers={manufacturers} 
               setManufacturer={setManufacturer}
@@ -179,6 +231,7 @@ const Form = () => {
 
           <div className="chouse-services">
             <h3 className='services-sub-title'>Odaberite jednu ili više usluga koju trebate</h3>
+            <h3 className='services-sub-title-error'>{errors.selectedServicesError}</h3>
             <ProvidedServicesList 
               providedServices={providedServices}
               handleCheckboxChange={handleCheckboxChange}

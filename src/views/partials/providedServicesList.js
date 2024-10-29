@@ -13,12 +13,12 @@ const ProvidedServicesList = ({ providedServices, handleCheckboxChange }) => {
             <li className='single-service-box' key={service.id}>
                 <input
                   type="checkbox"
-                  id={`service-${service.id}`}
+                  id={`${service.id}`}
                   name="services"
-                  value={service.price} 
+                  value={service.price}
                   onClick={handleCheckboxChange} 
                 />
-                <label htmlFor={`service-${service.id}`}>
+                <label htmlFor={`${service.id}`}>
                     {service.name}  <span>({service.price}€)</span> {/* Label text */}
                 </label>
             </li>

@@ -17,6 +17,9 @@
           @include H4(700, $primary_100);
           margin-bottom: 10px;
         }
+        .manufacturers-sub-title-error {
+          @include H6(700, $error);
+        }
         .manufacturer-list {
           padding: 14px 10px;
           list-style: none;
@@ -28,7 +31,10 @@
             flex: 0 0 30%;
             label {
               margin-left: 10px;
-              @include H5(400, $base_100)
+              @include H5(400, $base_100);
+              &:hover {
+                cursor: pointer;
+              }
             }
           }  
         }
@@ -39,6 +45,9 @@
         .services-sub-title {
           @include H4(700, $primary_100);
           margin-bottom: 10px;
+        }
+        .services-sub-title-error {
+          @include H6(700, $error);
         }
         .services-list {
           padding: 14px 10px;
@@ -52,6 +61,9 @@
             label {
               margin-left: 10px;
               @include H5(400, $base_100);
+              &:hover {
+                cursor: pointer;
+              }
               span {
                 @include H5(400, $primary_200);
               }
@@ -124,6 +136,9 @@
             border: 1px solid $base_400;
             border-radius: 99px;
             @include H6(400, $base_100);
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }
