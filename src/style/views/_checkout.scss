@@ -1,0 +1,146 @@
+.config-checkout {
+  padding: 40px 0px;
+  display: flex;
+  justify-content: center;
+
+  .checkout-holder {
+    max-width: 600px;
+    padding: 0px 30px;
+    .checkout-title {
+      margin-bottom: 20px;
+      @include H2(700, $base_100);
+    }
+    .checkout-header {
+      h3 {
+        margin-bottom: 10px;
+        @include H4(700, $primary_100);
+      }
+      p {
+        margin-bottom: 20px;
+        @include H5(400, $base_100);
+      }
+    }
+
+    .checkout-review {
+      padding: 20px;
+      border-radius: 20px;
+      background: $bg_200;
+
+      .checkout-model-title {
+        @include H4(700, $primary_100);
+        margin-bottom: 5px;
+      }
+      .checkout-model-content {
+        @include H5(400, $base_100);
+        margin-bottom: 15px;
+      }
+      .checkout-model-title {
+        @include H4(700, $primary_100);
+        margin-bottom: 5px;
+      }
+      .checkout-list-item {
+        margin-bottom: 15px;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        li {
+          flex: 1 0 100%;
+          padding: 5px;
+          display: flex;
+          border-bottom: 1px solid $base_400;
+          @include H5(400, $base_100);
+          span {
+            margin-left: auto;
+          }
+        }
+        .list-item-coupon {
+          border-bottom: 1px solid transparent;
+          justify-content: flex-end;
+          @include H5(400, $base_200);
+          span {
+            @include H5(400, $base_100);
+            margin-left: 20px;
+          }
+        }
+        .list-item-total {
+          border-bottom: 1px solid transparent;
+          justify-content: flex-end;
+          @include H5(400, $base_200);
+          span {
+            @include H5(500, $primary_100);
+            margin-left: 20px;
+          }
+        }
+      }
+
+      .checkout-user-info {
+        @include H4(700, $primary_100);
+        margin-bottom: 5px;
+      }
+      .user-name-holder {
+        display: flex;
+        gap: 5px;
+        p {
+          width: 110px;
+          @include H5(400, $base_100);
+          margin-bottom: 3px;  
+        }
+        span {
+          @include H5(400, $base_200);
+        }
+      }
+      .user-email-holder {
+        display: flex;
+        gap: 5px;
+        p {
+          width: 110px;
+          @include H5(400, $base_100);
+          margin-bottom: 3px;  
+        }
+        span {
+          @include H5(400, $base_200);
+        }
+      }
+      .user-phone-holder {
+        display: flex;
+        gap: 5px;
+        p {
+          width: 110px;
+          @include H5(400, $base_100);
+          margin-bottom: 3px;  
+        }
+        span {
+          @include H5(400, $base_200);          
+        }
+      }
+      .user-note-holder {
+        display: flex;
+        gap: 5px;
+        p {
+          width: 110px;
+          @include H5(400, $base_100);
+          margin-bottom: 3px;  
+        }
+        span {
+          @include H5(400, $base_200);
+        }
+      }
+    }
+    .checkout-control-btn {
+      margin-top: 20px;
+      display: flex;
+      justify-content: stretch;
+      align-items: center;
+      gap: 20px;
+      .step-back {
+        @include secondary_btn_big();
+      }
+      .submit-checkout {
+        flex: 1 0 60%;
+        @include primary_btn_small();
+      }
+    }
+  }
+}

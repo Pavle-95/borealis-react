@@ -1,0 +1,26 @@
+.thank-you {
+  height: calc(100svh - 71.59px);
+  display: flex;
+  justify-content: center;
+  .thank-you-content {
+    width: 95%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    .thank-you-img {
+      display: block;
+      max-width: 60px;
+      height: auto;
+    }
+    .thank-you-title {
+      @include H2(700, $primary_100);
+    }
+    .thank-you-text {
+      @include H4($base_400);
+      text-align: center
+    }
+  }
+}

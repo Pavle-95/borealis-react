@@ -72,7 +72,7 @@
   padding: 5px 15px;
   background-color: $primary_100;
   border-radius: 3px;
-  border: none;
+  border: 1px solid $primary_100;
   font-family: 'Satoshi Variable', sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -102,26 +102,26 @@
   }
 }
 
-// @mixin primary_btn_big() {
-//   padding: 5px 15px;
-//   background-color: $base_600;
-//   border-radius: 3px;
-//   border: 1px solid $base_200;
-//   font-family: 'Satoshi Variable', sans-serif;
-//   font-size: 18px;
-//   font-weight: 400;
-//   line-height: 25.2px;
-//   color: $base_100;
-//   &:hover {
-//     cursor: pointer;
-//     background-color: $base_500;
-//   }
-//   &:disabled {
-//     background-color: $base_400;
-//     border: 1px solid $base_400;
-//     color: $base_400;
-//   }
-// }
+@mixin secondary_btn_big() {
+  padding: 5px 15px;
+  background-color: $base_600;
+  border-radius: 3px;
+  border: 1px solid $base_200;
+  font-family: 'Satoshi Variable', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25.2px;
+  color: $base_100;
+  &:hover {
+    cursor: pointer;
+    background-color: $base_500;
+  }
+  &:disabled {
+    background-color: $base_400;
+    border: 1px solid $base_400;
+    color: $base_400;
+  }
+}
 
 @mixin link() {
   position: relative;

@@ -1,9 +1,7 @@
 import React from "react";
 
-
 const ProvidedServicesList = ({ providedServices, handleCheckboxChange }) => {
-
-
+  
   return (
     <ul className="services-list">
       {!providedServices ? (
@@ -15,6 +13,7 @@ const ProvidedServicesList = ({ providedServices, handleCheckboxChange }) => {
                   type="checkbox"
                   id={`${service.id}`}
                   name="services"
+                  data-name={service.name}
                   value={service.price}
                   onClick={handleCheckboxChange} 
                 />

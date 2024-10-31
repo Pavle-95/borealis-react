@@ -1,10 +1,6 @@
 import React from 'react';
 
-const ManufacturerList = ({ manufacturers, setManufacturer }) => {
-
-
-
-
+const ManufacturerList = ({ manufacturers, setManufacturer, setManufacturerId }) => {
 
   return (
     <ul className="manufacturer-list">
@@ -20,7 +16,11 @@ const ManufacturerList = ({ manufacturers, setManufacturer }) => {
               id={`manufacturer-${manufacturer.id}`} 
               name="manufacturer"
               value={manufacturer.name}
-              onChange={(e) => setManufacturer(manufacturer.id)}
+              onChange={(e) => {
+                  setManufacturer(e.target.value)
+                  setManufacturerId(manufacturer.id)
+                }
+              }
             />
             <label htmlFor={`manufacturer-${manufacturer.id}`}>
               {manufacturer.name} {/* Label text */}
