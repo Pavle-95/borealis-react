@@ -21,7 +21,7 @@ const CouponInput = ({ couponValue, setCouponValue, setCouponPercentage, recalcu
 
   // Coupon Hendling
   const handleCouponSubmit = async () => {
-
+    
     if(couponValue === '') {
       toast.warning("Promotional code invalid", { autoClose: 1000 });
       setCouponError(true);
@@ -32,11 +32,19 @@ const CouponInput = ({ couponValue, setCouponValue, setCouponPercentage, recalcu
   
     if(data.message) {
       toast.warning(data.message, { autoClose: 1000 });
+      setCouponPercentage(0);
       setCouponError(true);
+      setCouponValid(false);
+      recalculateTotal();
       return;
     }
 
+    if(couponValid) {
+      toast.success("Promotional coupon valid", { autoClose: 1000 });
+    }
+
     if (data.discountPercentage && !couponValid) {
+      toast.success("Promotional coupon valid", { autoClose: 1000 });
       setCouponPercentage(data.discountPercentage);      
       setCouponValid(true);
       setCouponError(false);
@@ -44,10 +52,11 @@ const CouponInput = ({ couponValue, setCouponValue, setCouponPercentage, recalcu
 
       return;
     }
+
   }
 
   // Coupon handling
-  const handleRemoveCoupon = () => {
+  const handleRemoveCoupon = () => {    
     setCouponPercentage(0);
     setCouponValid(false);
     setCouponValue('');
@@ -83,7 +92,6 @@ const CouponInput = ({ couponValue, setCouponValue, setCouponPercentage, recalcu
       }
     </div>
   )
-
 }
 
 export default CouponInput;

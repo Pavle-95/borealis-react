@@ -1,6 +1,13 @@
 // Env Data
+// Env is not wokring on varcel
+// const API_URL_BASE = process.env.REACT_APP_API_URL_BASE;
+// const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN;
+
 const API_URL_BASE = process.env.REACT_APP_API_URL_BASE;
 const AUTH_TOKEN = process.env.REACT_APP_AUTH_TOKEN;
+
+
+
 
 export const getAllManufacturers  = async () => {
   try {

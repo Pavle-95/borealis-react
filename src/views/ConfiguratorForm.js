@@ -28,25 +28,26 @@ const Form = () => {
   const { formData, setFormData } = useFormStore();
 
   // All Data From Submited Form
-  const [manufacturer, setManufacturer] = useState('');
-  const [manufacturerId, setManufacturerId] = useState('');
+  const [manufacturer, setManufacturer] = useState(formData.manufacturer || '');
+  const [manufacturerId, setManufacturerId] = useState(formData.manufacturerId || '');
 
-  const [selectedServices, setSelectedServices] = useState([]);
-  const [selectedServicesID, setSelectedServicesID] = useState([]);
-  const [selectedServicesName, setSelectedServicesName] = useState([]);
+  const [selectedServices, setSelectedServices] = useState(formData.selectedServicesPrice || []);
+  const [selectedServicesID, setSelectedServicesID] = useState(formData.serviceIds || []);
+  const [selectedServicesName, setSelectedServicesName] = useState(formData.selectedServices || []);
   
   const [fullName, setFullName] = useState(formData.fullName || '');
   const [phoneNumber, setPhoneNumber] = useState(formData.phoneNumber || 0);
   const [email, setEmail] = useState(formData.email || '');
-  const [notes, setNotes] = useState(formData.notes || '');
+  const [notes, setNotes] = useState(formData.note || '');
 
   // Total
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(formData.total || '');
 
   // Coupon
-  const [couponValue, setCouponValue] = useState('');
-  const [couponPercentage, setCouponPercentage] = useState(0);
-  const [couponAmount, setCouponAmount] = useState('')
+  const [couponValue, setCouponValue] = useState(formData.promoCode || '');
+  const [couponPercentage, setCouponPercentage] = useState(formData.couponPercentage || '');
+  const [couponAmount, setCouponAmount] = useState(formData.couponAmount || '')
+
   // Error state
   const [errors, setErrors] = useState({
     fullName: '',
@@ -70,8 +71,8 @@ const Form = () => {
     if (!phoneNumber) {
       newErrors.phoneNumber = 'Broj telefona je obavezan.';
       isValid = false;
-    } else if (!/^\d+$/.test(phoneNumber)) {
-      newErrors.phoneNumber = 'Broj telefona može sadržavati samo brojeve.';
+    } else if (!/^\+?\d+$/.test(phoneNumber)) {
+      newErrors.phoneNumber = 'Broj telefona može sadržavati samo brojeve i opcionalno + na početku.';
       isValid = false;
     }
 
@@ -204,6 +205,7 @@ const Form = () => {
             <h3 className='manufacturers-sub-title'>Odaberite proizvođača vašeg vozila</h3>
             <h3 className='manufacturers-sub-title-error'>{errors.manufacturerError}</h3>
             <ManufacturerList 
+              manufacturer={manufacturer}
               manufacturers={manufacturers} 
               setManufacturer={setManufacturer}
               setManufacturerId={setManufacturerId}
@@ -214,6 +216,7 @@ const Form = () => {
             <h3 className='services-sub-title'>Odaberite jednu ili više usluga koju trebate</h3>
             <h3 className='services-sub-title-error'>{errors.selectedServicesError}</h3>
             <ProvidedServicesList 
+              selectedServicesID={selectedServicesID}
               providedServices={providedServices}
               handleCheckboxChange={handleCheckboxChange}
             />

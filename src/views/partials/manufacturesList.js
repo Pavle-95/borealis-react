@@ -1,7 +1,8 @@
 import React from 'react';
 
-const ManufacturerList = ({ manufacturers, setManufacturer, setManufacturerId }) => {
-
+const ManufacturerList = ({ manufacturers, manufacturer, setManufacturer, setManufacturerId }) => {
+  const selectedManufacturer = manufacturer;
+  
   return (
     <ul className="manufacturer-list">
       {!manufacturers ? (
@@ -16,6 +17,7 @@ const ManufacturerList = ({ manufacturers, setManufacturer, setManufacturerId })
               id={`manufacturer-${manufacturer.id}`} 
               name="manufacturer"
               value={manufacturer.name}
+              checked={selectedManufacturer === manufacturer.name} 
               onChange={(e) => {
                   setManufacturer(e.target.value)
                   setManufacturerId(manufacturer.id)

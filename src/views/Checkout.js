@@ -15,12 +15,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Checkout = () => {
     const navigate = useNavigate();
-
     const { formData } = useFormStore();
-
-    console.log(formData);
     
-
     async function submitForm() {
       let formSubmit = {
         manufacturerId: formData.manufacturerId,

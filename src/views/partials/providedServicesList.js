@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProvidedServicesList = ({ providedServices, handleCheckboxChange }) => {
+const ProvidedServicesList = ({ selectedServicesID, providedServices, handleCheckboxChange }) => {
   
   return (
     <ul className="services-list">
@@ -15,6 +15,7 @@ const ProvidedServicesList = ({ providedServices, handleCheckboxChange }) => {
                   name="services"
                   data-name={service.name}
                   value={service.price}
+                  checked={selectedServicesID.includes(service.id)}
                   onClick={handleCheckboxChange} 
                 />
                 <label htmlFor={`${service.id}`}>
